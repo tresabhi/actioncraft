@@ -40,7 +40,11 @@ jobs:
 
       - name: Start server
         run: |
+          sudo ufw status
+          sudo ufw allow 25565  
           cloudflared tunnel --url http://localhost:${{ env.MINECRAFT_PORT }} &
           java -jar server.jar nogui
           echo "eula=true" > eula.txt
-          java -jar server.jar nogui
+          java -jar server.jar nogui &
+          sleep 15
+          sudo netstat -tuln
