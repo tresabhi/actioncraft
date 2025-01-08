@@ -26,8 +26,8 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTOR }}
           java-version: ${{ env.JAVA_VERSION }}
 
-      - name: Set up cloudflared
-        uses: AnimMouse/setup-cloudflared@v2
+      # - name: Set up cloudflared
+      #   uses: AnimMouse/setup-cloudflared@v2
 
       - name: Download data
         uses: actions/checkout@v4
@@ -37,8 +37,12 @@ jobs:
       - name: Set up server
         run: curl -L "https://mcutils.com/api/server-jars/${{ env.MINECRAFT_SERVER_TYPE }}/${{ env.MINECRAFT_VERSION }}/download" -o server.jar
 
-      - name: Run server
+      - name: Set up port
         run: |
-          java -Xmx1024M -Xms1024M -jar server.jar nogui &
-          sudo ufw allow 25565
+          sudo ufw allow 25565/tcp
+          sudo ufw allow 25565/udp
+          sudo ufw status
           curl ifconfig.me
+
+      - name: Run server
+        run: java -Xmx1024M -Xms1024M -jar server.jar nogui
