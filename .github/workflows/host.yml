@@ -46,5 +46,6 @@ jobs:
           java -jar server.jar nogui
           echo "eula=true" > eula.txt
           java -jar server.jar nogui &
-          sleep 15
+          sleep 30
           sudo netstat -tuln
+          sleep 9999999
