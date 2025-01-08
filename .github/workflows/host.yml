@@ -2,7 +2,7 @@ name: Host
 
 on:
   push:
-    branches: main, data
+    branches: [main, data]
   workflow_dispatch:
 
 env:
