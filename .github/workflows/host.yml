@@ -5,6 +5,10 @@ on:
     branches: [main, data]
   workflow_dispatch:
 
+concurrency:
+  group: host
+  cancel-in-progress: true
+
 env:
   JAVA_DISTRIBUTOR: temurin # https://github.com/actions/setup-java#supported-distributions
   JAVA_VERSION: 21 # https://minecraft.wiki/w/Tutorial:Setting_up_a_server#Java_version
@@ -34,7 +38,6 @@ jobs:
         run: curl -L "https://mcutils.com/api/server-jars/${{ env.MINECRAFT_SERVER_TYPE }}/${{ env.MINECRAFT_VERSION }}/download" -o server.jar
 
       - name: Run server
-        run: java -Xmx1024M -Xms1024M -jar server.jar nogui &
-
-      - name: Tunnel
-        run: cloudflared tunnel --url http://localhost:25565/
+        run: |
+          cloudflared tunnel --url http://localhost:25565/ &
+          java -Xmx1024M -Xms1024M -jar server.jar nogui
