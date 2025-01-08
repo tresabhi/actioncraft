@@ -5,9 +5,9 @@ on:
     branches: [main, data]
   workflow_dispatch:
 
-# concurrency:
-#   group: host
-#   cancel-in-progress: true
+concurrency:
+  group: host
+  cancel-in-progress: false
 
 env:
   JAVA_DISTRIBUTOR: temurin # https://github.com/actions/setup-java#supported-distributions
@@ -40,5 +40,4 @@ jobs:
 
       - name: Start server
         run: |
-          java -Xmx1024M -Xms1024M -jar server.jar nogui &
-          # cloudflared tunnel --url localhost:${{ env.MINECRAFT_PORT }}
+          java -Xmx1024M -Xms1024M -jar server.jar nogui
