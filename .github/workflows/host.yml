@@ -14,6 +14,7 @@ env:
   JAVA_VERSION: 21 # https://minecraft.wiki/w/Tutorial:Setting_up_a_server#Java_version
   MINECRAFT_SERVER_TYPE: vanilla # https://mcutils.com/server-jars
   MINECRAFT_VERSION: 1.21.4 # https://minecraft.wiki/w/Java_Edition_version_history
+  MINECRAFT_PORT: 25565
 
 jobs:
   host:
@@ -37,8 +38,8 @@ jobs:
       - name: Set up port
         run: |
           sudo ufw disable
-          sudo ufw allow 25565/tcp
-          sudo ufw allow 25565/udp
+          sudo ufw allow ${{ env.MINECRAFT_PORT }}/tcp
+          sudo ufw allow ${{ env.MINECRAFT_PORT }}/udp
           curl ifconfig.me
           sudo ufw status
 
