@@ -40,8 +40,6 @@ jobs:
           sudo ufw allow 25565/tcp
           sudo ufw allow 25565/udp
           curl ifconfig.me
-          sudo netstat -tuln | grep 25565
-
           sudo ufw status
 
       - name: Run server
