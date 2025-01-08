@@ -5,9 +5,9 @@ on:
     branches: [main, data]
   workflow_dispatch:
 
-concurrency:
-  group: host
-  cancel-in-progress: true
+# concurrency:
+#   group: host
+#   cancel-in-progress: true
 
 env:
   JAVA_DISTRIBUTOR: temurin # https://github.com/actions/setup-java#supported-distributions
