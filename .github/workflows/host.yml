@@ -39,6 +39,7 @@ jobs:
 
       - name: Set up port
         run: |
+          sudo ufw enable
           sudo ufw allow 25565/tcp
           sudo ufw allow 25565/udp
           sudo ufw status
