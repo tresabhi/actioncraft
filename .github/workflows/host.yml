@@ -2,10 +2,8 @@ name: Host
 
 on:
   push:
-    branches: main
+    branches: main, data
   workflow_dispatch:
-  schedule:
-    - cron: "0 */5 * * *"
 
 env:
   JAVA_DISTRIBUTOR: temurin # https://github.com/actions/setup-java#supported-distributions
