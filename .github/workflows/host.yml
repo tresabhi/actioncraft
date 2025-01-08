@@ -30,10 +30,10 @@ jobs:
       - name: Set up cloudflared
         uses: AnimMouse/setup-cloudflared@v2
 
-      - name: Download data
-        uses: actions/checkout@v4
-        with:
-          ref: data
+      # - name: Download data
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: data
 
       - name: Set up server
         run: curl -L "https://mcutils.com/api/server-jars/${{ env.MINECRAFT_SERVER_TYPE }}/${{ env.MINECRAFT_VERSION }}/download" -o server.jar
