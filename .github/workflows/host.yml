@@ -26,9 +26,6 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTOR }}
           java-version: ${{ env.JAVA_VERSION }}
 
-      # - name: Set up cloudflared
-      #   uses: AnimMouse/setup-cloudflared@v2
-
       - name: Download data
         uses: actions/checkout@v4
         with:
@@ -39,12 +36,13 @@ jobs:
 
       - name: Set up port
         run: |
-          sudo ufw enable
+          sudo ufw disable
           sudo ufw allow 25565/tcp
           sudo ufw allow 25565/udp
-          sudo ufw status
           curl ifconfig.me
           sudo netstat -tuln | grep 25565
+
+          sudo ufw status
 
       - name: Run server
         run: java -Xmx1024M -Xms1024M -jar server.jar nogui
