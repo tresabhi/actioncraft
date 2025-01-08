@@ -42,5 +42,5 @@ jobs:
         run: |
           sudo ufw status
           sudo ufw allow 25565  
-          cloudflared tunnel --url http://localhost:${{ env.MINECRAFT_PORT }} &
+          cloudflared tunnel --url 0.0.0.0:${{ env.MINECRAFT_PORT }} &
           java -jar server.jar nogui
