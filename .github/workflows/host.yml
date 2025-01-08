@@ -7,14 +7,25 @@ on:
   schedule:
     - cron: "0 */5 * * *"
 
+env:
+  JAVA_DISTRIBUTOR: temurin # https://github.com/actions/setup-java#supported-distributions
+  JAVA_VERSION: 21 # https://minecraft.wiki/w/Tutorial:Setting_up_a_server#Java_version
+  MINECRAFT_SERVER_TYPE: vanilla # https://mcutils.com/server-jars
+  MINECRAFT_VERSION: 1.21.4 # https://minecraft.wiki/w/Java_Edition_version_history
+
 jobs:
   host:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/setup-java@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
-          java-version: "21"
+          distribution: ${{ env.JAVA_DISTRIBUTOR }}
+          java-version: ${{ env.JAVA_VERSION }}
 
-      - run: java --help
+      - name: Set up server
+        run: curl -L "https://mcutils.com/api/server-jars/${{ env.MINECRAFT_SERVER_TYPE }}/${{ env.MINECRAFT_VERSION }}/download" -o server.jar
+
+      - name: Test
+        run: ls
