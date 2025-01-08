@@ -39,5 +39,6 @@ jobs:
 
       - name: Run server
         run: |
-          cloudflared tunnel --url localhost:25565/ &
-          java -Xmx1024M -Xms1024M -jar server.jar nogui
+          java -Xmx1024M -Xms1024M -jar server.jar nogui &
+          sudo ufw allow 25565
+          curl ifconfig.me
