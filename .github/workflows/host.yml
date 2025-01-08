@@ -39,5 +39,5 @@ jobs:
 
       - name: Run server
         run: |
-          cloudflared tunnel --url http://localhost:25565/ &
+          cloudflared tunnel --url localhost:25565/ &
           java -Xmx1024M -Xms1024M -jar server.jar nogui
